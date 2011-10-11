@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html
+
+<html>
+<head>
+    <title>Movies</title>
+    <script src="../Scripts/jquery-1.6.4.js" type="text/javascript"></script>
+    <script src="../Scripts/template.js" type="text/javascript"></script>
+    <script id="movieTemplate" type="html/template">
+        <h1>$(title)</h1>
+        <p><img href='$(image)' />$(sinopse)</p>
+    </script>
+
+    <script type="text/javascript">
+
+            var movie = { title: "Shrek", image: "http://...", sinopse: "Lorem ipsum ..." };
+            var htmlMovie = template("movieTemplate", movie);
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+﻿/** { border: solid; }*/
+
+section.movie
+{
+	border: solid 3px rgb(83, 78, 38);
+	border-radius: 15px;
+	width: 600px;
+	height: 400px;
+	margin: 10px;
+	padding: 5px;
+	float:left;
+}
+
+section.movie hgroup h1 
+{
+	margin-top:0;
+	border-radius: 15px;
+	text-align:center;
+	
+}
+section.movie hgroup h2
+{
+	font-weight: normal;
+	margin:0;
+	font-size:smaller;
+}
+
+.content
+{
+	width: 350px;
+}
+
+section.photos
+{
+	float: right;
+	position: relative;
+	top: 30px;
+}
+
+section.photos h1
+{
+	display: none;
+}
+
+span.duration
+{
+	display: block;
+	padding: 2px;
+}
+
+span.year
+{
+	display: block;
+	padding: 2px;
+}
+
+.cast
+{
+	border: solid;
+	border-radius: 15px;
+	padding: 5px;
+}
+
+.cast h1
+{
+	margin-top:0;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.cast dl
+{
+	margin-top:0;
+}
+
+.cast dl:last-child
+{
+	margin-bottom:0;
+}
+
+.cast dl dt
+{
+}
+
+.cast dl dt:first-child
+{
+	margin-top:0;
+}
+
+section.links h1
+{
+	display: none;
+}
+
+section.links ul li.imdb
+{
+	list-style-image: url("IMDb_favicon.png");
+}
+
+/*        section.services ul li.facebook { list-style-image: url(data:image/jpg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBggGBQkIBwgKCQkKDRYODQwXDRoTFBAWHxwhIB8cHh4jJzIqIyUvJR4eNzssLzM1ODg4ITU5QTQ4PCwsLCkBCQoKDQsNGQ8OGTUkHiQ1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NSw1NTU1KTQ1NTUsKik1NTUpKSw1NTUsKSkqKf/AABEIABQAFAMBIgACEQEDEQH/xAAaAAABBQEAAAAAAAAAAAAAAAAAAwQFBgcB/8QAJxAAAQMEAQMDBQAAAAAAAAAAAQIDBAAFESESBhOBUWHRBxQiMUH/xAAYAQADAQEAAAAAAAAAAAAAAAABBAUDAP/EABwRAAICAwEBAAAAAAAAAAAAAAECABEDEiFBMf/aAAwDAQACEQMRAD8AkpV7ckSlq7/Ik7OdmrBY7WmXZ37jcnJKGmzhKEg8iNb9/wB1mkhoGY5r+1pdl6guQ+mE2b3x9zEPbZXwH4pHEDWN1azIyoNfaiKEFjcYxuoXGEuNx5jjTaXCEpzg+R60VV4SlyG3HnTycdcUtZ9Sdmig2Fb6Jwc19jq6WyOzepbSEni06pCd7IB1ml25b8e0uW1p1SYj5ytvA358CuUVpjYtjFwMAGNSf6S6XgXWzqef7qVIdUgBK8DAA+aKKKlZcj7nsbVV1HJ//9k=); }
+*/

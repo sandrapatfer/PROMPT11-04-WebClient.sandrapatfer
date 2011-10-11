@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <style type="text/css">
+            input { width: 300px; }
+            input.date { width: 150px; }
+            input.time { width: 100px; }
+            :checkbox { width: 150px; }
+    </style>
+
+    <script src="../Scripts/jquery-1.6.4.js" type="text/javascript"></script>
+    <script src="form.js" type="text/javascript"></script>
+</head>
+<body>
+    <h2>Create Work Item</h2>
+    <form action="/something/create" enctype="multipart/form-data" method="post">
+    <fieldset class="edit">
+        <p>
+            <label for="Title">Título</label>
+            <input data-val="true" data-val-required="The Title field is required." id="Title" name="Title" type="text" value="" style="">
+            <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true"></span>
+            <span class="helpSample" >Nome <b>longo</b> do trabalho</span>
+        </p>
+        <p>
+            <label for="Acronym">Acrónimo</label>
+            <input data-val="true" data-val-required="The Acronym field is required." id="Acronym" name="Acronym" type="text" value="">
+            <span class="field-validation-valid" data-valmsg-for="Acronym" data-valmsg-replace="true"></span>
+            <span class="helpSample" >Nome <b>curto</b> do trabalho</span>
+        </p>
+        <p>
+            <label for="info">Enunciado</label>
+            <input type="file" name="infoDocument.File">
+            <input id="cbIsToAdd_infoDocument" type="checkbox" name="infoDocument.IsToAdd" checked="checked" >
+            <span class="field-validation-valid" data-valmsg-for="infoDocument" data-valmsg-replace="true"></span>
+        </p>
+        <p>
+            <label for="attachment">Anexo(s)</label>
+            <input type="file" name="attachmentsDocument.File">
+            <input id="cbIsToAdd_attachmentsDocument" type="checkbox" name="attachmentsDocument.IsToAdd" checked="checked" >
+            <span class="field-validation-valid" data-valmsg-for="attachmentsDocument" data-valmsg-replace="true"></span>
+        </p>
+        <p>
+            <label for="StartDateDate">Data de Início</label>
+            <input class="date hasDatepicker" id="StartDateDate" name="StartDateDate" type="date" value="2011-10-05">
+            <input class="time" id="StartDateTime" name="StartDateTime" type="time" value="17:46">
+            <span class="field-validation-valid" data-valmsg-for="StartDate" data-valmsg-replace="true"></span>
+            <span class="helpSample" >Data de <b>publicação</b> do trabalho.</span>
+        </p>
+        <p>
+            <label for="DueDateDate">Data Limite</label>
+            <input class="date hasDatepicker" id="DueDateDate" name="DueDateDate" type="date" value="2011-10-20">
+            <input class="time" id="DueDateTime" name="DueDateTime" type="time" value="17:46">
+            <span class="field-validation-valid" data-valmsg-for="DueDate" data-valmsg-replace="true"></span>
+            <span class="helpSample" >Data limite para <b>entrega</b> do trabalho.</span>
+        </p>
+        <p>
+            <label for="AcceptLateSubmission">Accept Late Submission</label>
+            <input data-val="true" data-val-required="The AcceptLateSubmission field is required." id="AcceptLateSubmission" name="AcceptLateSubmission" type="checkbox" value="true">
+            <input name="AcceptLateSubmission" type="hidden" value="false">
+            <span class="helpSample" >Indica se é possível entregar o trabalho fora da data limite de entrega.</span>
+        </p>
+        <p>
+            <label for="AcceptResubmission">Accept Resubmission</label>
+            <input data-val="true" data-val-required="The AcceptResubmission field is required." id="AcceptResubmission" name="AcceptResubmission" type="checkbox" value="true">
+            <input name="AcceptResubmission" type="hidden" value="false">
+            <span class="helpSample" >Indica se é possível entregar várias versões do trabalho.</span>
+        </p>
+        <p>
+            <label for="ReportUploadInfo_IsRequired">Requires Report</label>
+            <input data-val="true" data-val-required="The IsRequired field is required." id="ReportUploadInfo_IsRequired" name="ReportUploadInfo.IsRequired" type="checkbox" value="true">
+            <input name="ReportUploadInfo.IsRequired" type="hidden" value="false">
+            <span class="helpSample" >Indica se é necessário entregar relatório para este trabalho.</span>
+        </p>
+        <fieldset style="display: block;">
+            <p>
+                <label for="ReportUploadInfo_MaxFileSizeInMB">Maximum Upload File Size</label>
+                <select
+                    data-val="true" data-val-number="The field MaxFileSizeInMB must be a number."
+                    data-val-required="The MaxFileSizeInMB field is required." id="ReportUploadInfo_MaxFileSizeInMB"
+                    name="ReportUploadInfo.MaxFileSizeInMB">
+                    <option value="1">1 MB</option>
+                    <option value="2">2 MB</option>
+                    <option value="4">4 MB</option>
+                    <option value="8">8 MB</option>
+                    <option value="16">16 MB</option>
+                    <option value="32">32 MB</option>
+                    <option value="64">64 MB</option>
+                    <option value="128">128 MB</option>
+                    <option value="256">256 MB</option>
+                </select>
+                <span class="helpSample" >Tamanho <b>máximo</b> do ficheiro a entregar.</span>
+            </p>
+            <p>
+                <label for="ReportUploadInfo_AcceptedExtensions">Accepted File Extensions</label>
+                <input
+                    data-val="true" data-val-regex="The field AcceptedExtensions must match the regular expression &amp;#39;(?:\.\w+\|?)*&amp;#39;."
+                    data-val-regex-pattern="(?:\.\w+\|?)*" id="ReportUploadInfo_AcceptedExtensions"
+                    name="ReportUploadInfo.AcceptedExtensions" type="text" value=".txt|.doc|.docx|.pdf">
+                <span class="helpSample" >Extensões de ficheiros aceites na entrega do relatório (ex: .txt|.doc|.docx|.pdf).</span>
+            </p>
+        </fieldset>
+        <p>
+            <label for="AttachmentUploadInfo_IsRequired">Requires Attachment(s)</label>
+            <input
+                data-val="true" data-val-required="The IsRequired field is required." id="AttachmentUploadInfo_IsRequired"
+                name="AttachmentUploadInfo.IsRequired" type="checkbox" value="true">
+                <input name="AttachmentUploadInfo.IsRequired" type="hidden" value="false">
+            <span class="helpSample" >Indica se é necessário entregar anexo(s) para este trabalho.</span>
+        </p>
+        <fieldset >
+            <p>
+                <label for="AttachmentUploadInfo_MaxFileSizeInMB">Maximum Upload File Size</label>
+                <select
+                    data-val="true" data-val-number="The field MaxFileSizeInMB must be a number."
+                    data-val-required="The MaxFileSizeInMB field is required." id="AttachmentUploadInfo_MaxFileSizeInMB"
+                    name="AttachmentUploadInfo.MaxFileSizeInMB">
+                    <option value="1">1 MB</option>
+                    <option value="2">2 MB</option>
+                    <option value="4">4 MB</option>
+                    <option value="8">8 MB</option>
+                    <option value="16">16 MB</option>
+                    <option value="32">32 MB</option>
+                    <option value="64">64 MB</option>
+                    <option value="128">128 MB</option>
+                    <option value="256">256 MB</option>
+                </select>
+                <span class="helpSample" >Tamanho <b>máximo</b> do ficheiro a entregar.</span>
+            </p>
+            <p>
+                <label for="AttachmentUploadInfo_AcceptedExtensions">Accepted File Extensions</label>
+                <input
+                    data-val="true" data-val-regex="The field AcceptedExtensions must match the regular expression &amp;#39;(?:\.\w+\|?)*&amp;#39;."
+                    data-val-regex-pattern="(?:\.\w+\|?)*" id="AttachmentUploadInfo_AcceptedExtensions"
+                    name="AttachmentUploadInfo.AcceptedExtensions" type="text" value=".zip|.rar|.gz|.bz2">
+                <span class="helpSample" >Extensões de ficheiros aceites na entrega do relatório (ex: .zip|.rar|.gz|.bz2).</span>
+            </p>
+        </fieldset>
+        <p class="actions">
+            <input type="submit" value="Create">
+        </p>
+    </fieldset>
+    </form>
+</body>
+</html>

@@ -1,19 +1,102 @@
-﻿<!DOCTYPE html
+﻿<!DOCTYPE html>
 
 <html>
 <head>
     <title>Movies</title>
+    <link class="css" href="css2.css" rel="stylesheet" type="text/css" />
     <script src="../Scripts/jquery-1.6.4.js" type="text/javascript"></script>
     <script src="../Scripts/template.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).click(function () {
+            if ($("link.css").attr("href") == "css2.css") {
+                $("link.css").attr("href", "css1.css");
+            }
+            else {
+                $("link.css").attr("href", "css2.css");
+            }
+        });
+    </script>
+    
     <script id="movieTemplate" type="html/template">
-        <h1>$(title)</h1>
-        <p><img href='$(image)' />$(sinopse)</p>
+        <section class="movie">
+            <section class="photos">
+                <h1>IMDB</h1>
+                <img src='$( image )' alt='$( image_alt )' >
+            </section>
+            <div class="content">
+                <hgroup>
+                    <h1>$( title )</h1>
+                    <h2>$( sinopse )</h2>
+                </hgroup>
+                <div class="info">
+                    <span class="duration">Duration: $( duration ) min</span>
+                    <span class="year">Year: $( year )</span>
+                </div>
+                <div class="cast">
+                    <section>
+                        <h1>Cast</h1>
+                        <dl>
+                            <dt>Director</dt>
+                            <dd>$( director )</dd>
+                            <dt>Stars</dt>
+                            <dd>$( stars.join(', ') )</dd>
+                        </dl>
+                    </section>
+                </div>
+                <section class="links">
+                    <h1>Links</h1>
+                    <ul>
+                        <li class="imdb"><a href="$( imdb_link )">IMDB</a></li>
+                    </ul>
+                </section>
+            </div>
+        </section>
     </script>
 
     <script type="text/javascript">
 
-            var movie = { title: "Shrek", image: "http://...", sinopse: "Lorem ipsum ..." };
-            var htmlMovie = template("movieTemplate", movie);
+        var movies = [ 
+        {   title: "Pulp Fiction",
+            image: "http://ia.media-imdb.com/images/M/MV5BMjE0ODk2NjczOV5BMl5BanBnXkFtZTYwNDQ0NDg4._V1._SY317_CR4,0,214,317_.jpg",
+            image_alt: "Pulp Fiction Poster",
+            sinopse: "The lives of two mob hit men, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+            duration: "154",
+            year: "1994",
+            director: "Quentin Tarantino",
+            stars: ["John Travolta", "Uma Thurman", "Samuel L. Jackson"],
+            imdb_link: "http://www.imdb.com/title/tt0110912/"
+        },
+        { title: "Midnight in Paris",
+            image: "http://ia.media-imdb.com/images/M/MV5BMTM4NjY1MDQwMl5BMl5BanBnXkFtZTcwNTI3Njg3NA@@._V1._SY317_CR0,0,214,317_.jpg",
+            image_alt: "Meia-Noite em Paris Poster",
+            sinopse: "A romantic comedy about a family traveling to the French capital for business. The party includes a young engaged couple forced to confront the illusion that a life different from their own is better.",
+            duration: "94",
+            year: "2011",
+            director: "Woody Allen",
+            stars: ["Owen Wilson", "Rachel McAdams", "Kathy Bates"],
+            imdb_link: "http://www.imdb.com/title/tt1605783/"
+        },
+        { title: "Sherlock Holmes",
+            image: "http://ia.media-imdb.com/images/M/MV5BMTg0NjEwNjUxM15BMl5BanBnXkFtZTcwMzk0MjQ5Mg@@._V1._SY317_.jpg",
+            image_alt: "Sherlock Holmes Poster",
+            sinopse: "Detective Sherlock Holmes and his stalwart partner Watson engage in a battle of wits and brawn with a nemesis whose plot is a threat to all of England.",
+            duration: "128",
+            year: "2009",
+            director: "Guy Ritchie",
+            stars: ["Robert Downey Jr.", "Jude Law", "Rachel McAdams"],
+            imdb_link: "http://www.imdb.com/title/tt0988045/"
+        }
+        ];
+
+        $(function () {
+            var htmlMovie2 = template("movieTemplate", movies);
+            $.each(htmlMovie2, function (i, elem) {
+                //var sElem = $(this.toString());
+                var sElem = $(elem);
+                sElem.appendTo(document.body);
+            });
+        });
 
     </script>
 

@@ -1,22 +1,33 @@
-﻿(function (window) {
-    var document = window.document;
-    function template(templateName, templateObject) {
-        var templateText = $("script[type='html/template']#" + templateName).text();
-        var regex = /\$\([^\)]+\)/g;
-        var templateParts = templateText.match(regex);
+﻿var template = function (templateName, arg2) {
+
+    var templateText = $("script[type='html/template']#" + templateName).text();
+    var regex = /\$\( [^\$]+ \)/g;
+    var templateParts = templateText.match(regex) || [];
+
+    var f = function (templateObject) {
+        var text = templateText;
         for (var i = 0; i < templateParts.length; i++) {
             var replaceText = templateParts[i];
-            var prop = replaceText.substring(2, replaceText.length - 1);
-            templateText = templateText.replace(replaceText, templateObject[prop]);
+            var prop = replaceText.substring(3, replaceText.length - 2);
+            var propValue = eval("templateObject." + prop);
+            if (propValue != null) {
+                text = text.replace(replaceText, propValue);
+            }
         }
-        return templateText;
+        return text;
     }
-    /*
-    1- o 2º param pode ser um array - como ver o tipo do param?
-    2- a função apenas tem um param e deve devolver uma função, estranho...
-    3- as marcas serem objectos dentro de objectos - como é q se identificam?
-    */
 
-    window.template = template;
-})(window);
-
+    if (arg2 == null) {
+        return f;
+    }
+    else if (arg2.constructor == Array) {
+        var arr = [];
+        for (var i = 0; i < arg2.length; i++) {
+            arr.push(f(arg2[i]));
+        }
+        return arr;
+    }
+    else {
+        return f(arg2);
+    }
+}

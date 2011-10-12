@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <script src="../Scripts/jquery-1.6.4.js" type="text/javascript"></script>
+    <script src="../Scripts/link.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        //var arr = [1, 2].where(function (item) { return item % 2 == 0; });
+        //$.each(arr, function () { console.log(this) });
+
+        var arr = [1, 2, 3, 4];
+        var filtered = linq
+                        .from(arr)
+//                        .foreach(console.log.bind(console))
+                        .where(function (item) { return item % 2 == 0; })
+//                        .foreach(console.log.bind(console));
+
+        var arr = [5, 6, 3, 4];
+        var filtered = linq
+                        .from(arr)
+                        .foreach(console.log.bind(console))
+                        .order(function (item) { return this; })
+                        .foreach(console.log.bind(console));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

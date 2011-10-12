@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html
+
+<html>
+<head>
+    <title>Movies</title>
+    <script src="../Scripts/jquery-1.6.4.js" type="text/javascript"></script>
+    <script src="../Scripts/template.js" type="text/javascript"></script>
+    <script id="movieTemplate" type="html/template">
+        <h1>$(title) $(obj.arg)</h1>
+        <p><img href='$(image)' />$(sinopse)</p>
+    </script>
+
+    <script type="text/javascript">
+
+        var movie1 = { title: "Shrek", image: "http://...", sinopse: "Lorem ipsum ...", obj: { arg: "a"} };
+        var movie2 = { title: "Shrek2", image: "http://...", sinopse: "Lorem ipsum ...", obj: { arg: "a"} };
+        var movie3 = { title: "Shrek3", image: "http://...", sinopse: "Lorem ipsum ...", obj: { arg: "a"} };
+        var htmlMovie1 = template("movieTemplate", movie1);
+        var htmlMovie2 = template("movieTemplate", [movie1, movie2]);
+        var htmlMovie3 = template("movieTemplate")(movie3);
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

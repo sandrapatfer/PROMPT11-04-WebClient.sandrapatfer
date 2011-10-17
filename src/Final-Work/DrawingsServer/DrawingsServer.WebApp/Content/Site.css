@@ -327,3 +327,10 @@ div#title {
 {
 	float: left;
 }
+
+/* Canvas */
+
+canvas#drawingCanvas 
+{
+    border: 1px solid;
+}

@@ -20,9 +20,27 @@
         var arr = [5, 6, 3, 4];
         var filtered = linq
                         .from(arr)
-                        .foreach(console.log.bind(console))
-                        .order(function (item) { return this; })
-                        .foreach(console.log.bind(console));
+//                        .foreach(console.log.bind(console))
+                        .order(function () { return this; })
+//                        .foreach(console.log.bind(console));
+
+        var arr = [5, 6, 3, 4];
+        var filtered = linq
+                        .from(arr)
+//                        .foreach(console.log.bind(console))
+                        .select(function (item) { return item + 1; })
+//                        .foreach(console.log.bind(console));
+
+
+        var students = [{ name: "Rui", grade: "10" }, { name: "Carlos", grade: "11" }, { name: "João", grade: 12}];
+
+        var a = linq.from(students).any(function () { return this.grade === 12 });
+//        console.log("true == " + a);
+
+        var b = linq.from(students).where(function () { return this.grade > 11; }).count();
+        console.log("1 == " + b);
+
+
 
     </script>
 </head>

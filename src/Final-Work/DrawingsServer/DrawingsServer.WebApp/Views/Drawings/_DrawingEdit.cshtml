@@ -41,6 +41,7 @@
         </div>
 
         @Html.FileInput("drawingImage")
+        <input type="hidden" name="canvasImage" id="canvasImage" />
 
         <canvas id="drawingCanvas" width="400" height="300">
             <p>Canvas is not suported, try another browser...</p>
@@ -52,6 +53,11 @@
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<!-- Why is this only working if I place it here? I tried wrapping the code with $() -->
+<script type="text/javascript">
+    $("form").submit(function () {
+        var canvas = $("#drawingCanvas")[0];
+        var canvasImage = canvas.toDataURL("image/png");
+        $("#canvasImage").val(canvasImage);
+    });
+</script>

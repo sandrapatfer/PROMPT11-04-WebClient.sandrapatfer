@@ -8,6 +8,7 @@ namespace DrawingsServer.DomainModel.Services
     public interface IDrawingsService
     {
         ICollection<Drawing> GetAllDrawings();
+        ICollection<Drawing> GetLatest(int count);
 
         void Add(Drawing newDrawing);
 

@@ -323,9 +323,9 @@ div#title {
     width: 6em;
 }
 
-.last_drawings 
+.editor-label 
 {
-	float: left;
+    display: inline;
 }
 
 /* Canvas */
@@ -333,4 +333,31 @@ div#title {
 canvas#drawingCanvas 
 {
     border: 1px solid;
+}
+
+/* Last Drawings Container */
+#last_drawings {
+    float: right;
+    background-color: White;
+    border: solid 2px;
+    width: 200px;
+    height: 612px;
+    padding: 4px;
+}
+
+.lastDrawing {
+    background-color: Black;
+    padding: 10px;
+}
+
+.lastDrawing h1 {
+    background-color: White;
+    padding: 10px;
+    font-size: 10px !important;
+}
+
+.lastDrawingThumb 
+{
+    background-color: White;
+    width: 180px;
 }

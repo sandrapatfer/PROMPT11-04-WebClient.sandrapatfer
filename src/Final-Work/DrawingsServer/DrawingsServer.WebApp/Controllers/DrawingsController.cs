@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DrawingsServer.DomainModel.Services;
 using DrawingsServer.DomainModel;
+using System.Text.RegularExpressions;
 
 namespace DrawingsServer.Controllers
 {
@@ -45,22 +46,35 @@ namespace DrawingsServer.Controllers
         // POST: /Drawings/Create
 
         [HttpPost]
-        public ActionResult Create(HttpPostedFileBase drawingImage)
+        public ActionResult Create(HttpPostedFileBase drawingImage, string canvasImage)
         {
             Drawing newDraw = new Drawing();
             TryUpdateModel(newDraw);
-            if (ModelState.IsValid && drawingImage != null)
+            if (ModelState.IsValid)
             {
-                newDraw.ImageContentType = drawingImage.ContentType;
-                newDraw.Image = new byte[drawingImage.ContentLength];
-                drawingImage.InputStream.Read(newDraw.Image, 0, drawingImage.ContentLength);
-                m_drawingsService.Add(newDraw);
-                return RedirectToAction("Index");
+                if (drawingImage != null)
+                {
+                    newDraw.ImageContentType = drawingImage.ContentType;
+                    newDraw.Image = new byte[drawingImage.ContentLength];
+                    drawingImage.InputStream.Read(newDraw.Image, 0, drawingImage.ContentLength);
+                    m_drawingsService.Add(newDraw);
+                    return RedirectToAction("Index");
+                }
+                else if (canvasImage != null)
+                {
+                    Regex expr = new Regex("data:(.*);base64,(.*)");
+                    MatchCollection matches = expr.Matches(canvasImage);
+                    if (matches.Count == 1 && matches[0].Groups.Count == 3)
+                    {
+                        // first group in match is the whole text
+                        newDraw.ImageContentType = matches[0].Groups[1].Value;
+                        newDraw.Image = Convert.FromBase64String(matches[0].Groups[2].Value);
+                        m_drawingsService.Add(newDraw);
+                        return RedirectToAction("Index");
+                    }
+                }
             }
-            else
-            {
-                return View(newDraw);
-            }
+            return View(newDraw);
         }
         
         //
@@ -114,6 +128,12 @@ namespace DrawingsServer.Controllers
             {
                 return View();
             }
+        }
+
+        public JsonResult Latest()
+        {
+            return Json(m_drawingsService.GetLatest(3).Select(d => new { Title = d.Title, ImageSource = String.Format("data:{0};base64,{1}", d.ImageContentType, Convert.ToBase64String(d.Image))}),
+                JsonRequestBehavior.AllowGet);
         }
     }
 }

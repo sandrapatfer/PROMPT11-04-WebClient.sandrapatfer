@@ -6,46 +6,59 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/ScriptsApp/canvas.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm("Create", "Drawings", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm((string)@ViewBag.FormAction, "Drawings", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Drawing</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Title)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Title)
-            @Html.ValidationMessageFor(model => model.Title)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Author)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Author)
-            @Html.ValidationMessageFor(model => model.Author)
+        <div class="field">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Title)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Category)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Category)
-            @Html.ValidationMessageFor(model => model.Category)
+        <div class="field">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Author)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Author)
+                @Html.ValidationMessageFor(model => model.Author)
+            </div>
         </div>
 
-        <div class="editor-label">
+        <div class="field">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Category)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Category)
+                @Html.ValidationMessageFor(model => model.Category)
+            </div>
+        </div>
+
+        <div class="editor-label-image">
             @Html.LabelFor(model => model.Image)
         </div>
 
-        @Html.FileInput("drawingImage")
-        <input type="hidden" name="canvasImage" id="canvasImage" />
+        <div class="optionDrawingFile">
+            <input type="radio" name="optionDrawingFile" value="file" />
+            @Html.FileInput("drawingImage")
+        </div>
 
-        <canvas id="drawingCanvas" width="400" height="300">
-            <p>Canvas is not suported, try another browser...</p>
-        </canvas>
+        <div class="optionDrawingCanvas">
+            <input type="radio" name="optionDrawingFile" value="canvas" checked />
+            <input type="hidden" name="canvasImage" id="canvasImage" />
+            @ViewBag.ImageSource
+            <canvas id="drawingCanvas" width="400" height="300">
+                <p>Canvas is not suported, try another browser...</p>
+            </canvas>
+        </div>
 
         <p>
             <input type="submit" value="@ViewBag.SubmitCaption" />

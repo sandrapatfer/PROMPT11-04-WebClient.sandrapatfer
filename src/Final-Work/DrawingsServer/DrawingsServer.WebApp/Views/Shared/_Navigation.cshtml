@@ -1,0 +1,36 @@
+﻿@model DrawingsServer.DomainModel.Helpers.IPagedList<DrawingsServer.DomainModel.Drawing>
+
+<section class="page-nav">
+
+@if (Model.PageIndex != 0)
+{
+    <span>
+    @{ 
+/*        var dic = new RouteValueDictionary(Html.ViewContext.RouteData.Values);
+        dic["PageNumber"] = 0;
+        dic["SortingCriteria"] = "";*/  
+        
+        }
+        @Ajax.RouteLink("|<<", "Paging", new { PageNumber = 0 }, new AjaxOptions() { UpdateTargetId = "drawingsTable" }, new { @class = "page-nav-first" })
+    </span>
+}
+@if (Model.HasPreviousPage)
+{
+    <span>
+        @Ajax.RouteLink("<", "Paging", new { PageNumber = Model.PageIndex - 1 }, new AjaxOptions() { UpdateTargetId = "drawingsTable" }, new { @class = "page-nav-prev" })
+    </span>
+}
+@if (Model.HasNextPage)
+{
+    <span>
+        @Ajax.RouteLink(">", "Paging", new { PageNumber = Model.PageIndex + 1 }, new AjaxOptions() { UpdateTargetId = "drawingsTable" }, new { @class = "page-nav-next" })
+    </span>
+}
+@if (Model.PageIndex != (Model.TotalPages - 1))
+{
+    <span>
+        @Ajax.RouteLink(">>|", "Paging", new { PageNumber = Model.TotalPages - 1 }, new AjaxOptions() { UpdateTargetId = "drawingsTable" }, new { @class = "page-nav-last" })
+    </span>
+}
+   
+</section>

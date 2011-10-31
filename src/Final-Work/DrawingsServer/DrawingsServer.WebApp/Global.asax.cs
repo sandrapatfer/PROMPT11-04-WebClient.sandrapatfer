@@ -23,9 +23,16 @@ namespace DrawingsServer
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "Paging",
+                "{controller}/Page{PageNumber}/",
+                new { controller = "Drawings", action = "Paging", PageNumber = 0 },
+                new { PageNumber = @"\d+" }
+            );
+
+            routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Drawings", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Drawings", action = "Index", id = UrlParameter.Optional, PageNumber = 0 } // Parameter defaults
             );
 
         }

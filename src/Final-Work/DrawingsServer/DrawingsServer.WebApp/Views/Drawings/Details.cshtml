@@ -9,32 +9,42 @@
 <fieldset>
     <legend>Drawing</legend>
 
-    <div class="display-label">Title</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Title)
+    <div class="field">
+        <div class="display-label">Title</div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Title)
+        </div>
     </div>
 
-    <div class="display-label">Author</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Author)
+    <div class="field">
+        <div class="display-label">Author</div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Author)
+        </div>
     </div>
 
-    <div class="display-label">Created</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Created)
+    <div class="field">
+        <div class="display-label">Created</div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Created)
+        </div>
     </div>
 
-    <div class="display-label">LastUpdated</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.LastUpdated)
+    <div class="field">
+        <div class="display-label">LastUpdated</div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.LastUpdated)
+        </div>
     </div>
 
-    <div class="display-label">Category</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Category)
+    <div class="field">
+        <div class="display-label">Category</div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Category)
+        </div>
     </div>
 
-    @Html.ImageBase64(Model.Image, Model.ImageContentType)
+    @Html.ImageBase64("drawingImage", Model.Image, Model.ImageContentType)
 
 </fieldset>
 <p>

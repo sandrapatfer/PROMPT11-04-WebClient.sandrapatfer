@@ -2,7 +2,9 @@
 
 @{
     ViewBag.Title = "Edit a Drawing";
+    ViewBag.FormAction = "Edit";
     ViewBag.SubmitCaption = "Save";
+    ViewBag.ImageSource = Html.ImageBase64("drawingImage", Model.Image, Model.ImageContentType, new { style = "visibility:hidden;width:0px;height:0px;" });
 }
 
 @Html.Partial("_DrawingEdit")

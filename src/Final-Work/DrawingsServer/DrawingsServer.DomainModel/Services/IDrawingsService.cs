@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DrawingsServer.DomainModel.Helpers;
 
 namespace DrawingsServer.DomainModel.Services
 {
     public interface IDrawingsService
     {
-        ICollection<Drawing> GetAllDrawings();
+        IPagedList<Drawing> GetAllDrawings(int pageIndex, int pageSize);
         ICollection<Drawing> GetLatest(int count);
 
         void Add(Drawing newDrawing);

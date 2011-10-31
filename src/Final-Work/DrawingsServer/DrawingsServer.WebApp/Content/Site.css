@@ -304,11 +304,25 @@ div#title {
 .display-label, 
 .editor-label {
     margin: 1em 0 0 0;
+    display: inline;
+    text-decoration: underline;
+}
+
+.display-label::after, 
+.editor-label::after {
+    content: ": ";
 }
 
 .display-field, 
 .editor-field {
-    margin: 0.5em 0 0 0;
+    margin: 1em 0 0 0;
+    display: inline;
+}
+
+.editor-field
+{
+    position: relative;
+    left: 10px;
 }
 
 .text-box {
@@ -323,15 +337,16 @@ div#title {
     width: 6em;
 }
 
-.editor-label 
-{
-    display: inline;
-}
-
 /* Canvas */
 
 canvas#drawingCanvas 
 {
+    border: 1px solid;
+}
+
+img#drawingImage
+{
+    margin: 1em 0 0 0;
     border: 1px solid;
 }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DrawingsServer.DomainModel.Helpers;
 using DrawingsServer.DomainModel.Services;
 using System.Threading;
 
@@ -34,9 +35,9 @@ namespace DrawingsServer.DomainModel.ServicesImpl
 
         #region IDrawingsService Members
 
-        public ICollection<Drawing> GetAllDrawings()
+        public IPagedList<Drawing> GetAllDrawings(int pageIndex, int pageSize)
         {
-            return m_drawings;
+            return m_drawings.ToPagedList(m_drawings.Count, pageIndex, pageSize);
         }
 
         public ICollection<Drawing> GetLatest(int count)
@@ -59,6 +60,7 @@ namespace DrawingsServer.DomainModel.ServicesImpl
 
         public void Update(Drawing drawing)
         {
+            drawing.LastUpdated = DateTime.Now;
         }
 
         #endregion

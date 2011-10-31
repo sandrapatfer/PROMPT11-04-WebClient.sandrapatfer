@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Drawing.cs" />
+    <Compile Include="Helpers\IPagedList.cs" />
+    <Compile Include="Helpers\PagedList.cs" />
+    <Compile Include="Helpers\SequencesToPagedListEnhancer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesImpl\InMemoryDrawingsService.cs" />
     <Compile Include="Services\IDrawingsService.cs" />

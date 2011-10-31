@@ -21,9 +21,14 @@ namespace DrawingsServer.Controllers
         //
         // GET: /Drawings/
 
-        public ActionResult Index()
+        public ActionResult Index(int PageNumber)
         {
-            return View(m_drawingsService.GetAllDrawings());
+            return View(m_drawingsService.GetAllDrawings(PageNumber, 1));
+        }
+
+        public PartialViewResult Paging(int PageNumber)
+        {
+            return PartialView("_DrawingsTable", m_drawingsService.GetAllDrawings(PageNumber, 1));
         }
 
         //
@@ -48,31 +53,11 @@ namespace DrawingsServer.Controllers
         [HttpPost]
         public ActionResult Create(HttpPostedFileBase drawingImage, string canvasImage)
         {
-            Drawing newDraw = new Drawing();
-            TryUpdateModel(newDraw);
-            if (ModelState.IsValid)
+            Drawing newDraw = FillDrawing(new Drawing(), drawingImage, canvasImage);
+            if (newDraw != null)
             {
-                if (drawingImage != null)
-                {
-                    newDraw.ImageContentType = drawingImage.ContentType;
-                    newDraw.Image = new byte[drawingImage.ContentLength];
-                    drawingImage.InputStream.Read(newDraw.Image, 0, drawingImage.ContentLength);
-                    m_drawingsService.Add(newDraw);
-                    return RedirectToAction("Index");
-                }
-                else if (canvasImage != null)
-                {
-                    Regex expr = new Regex("data:(.*);base64,(.*)");
-                    MatchCollection matches = expr.Matches(canvasImage);
-                    if (matches.Count == 1 && matches[0].Groups.Count == 3)
-                    {
-                        // first group in match is the whole text
-                        newDraw.ImageContentType = matches[0].Groups[1].Value;
-                        newDraw.Image = Convert.FromBase64String(matches[0].Groups[2].Value);
-                        m_drawingsService.Add(newDraw);
-                        return RedirectToAction("Index");
-                    }
-                }
+                m_drawingsService.Add(newDraw);
+                return RedirectToAction("Index");
             }
             return View(newDraw);
         }
@@ -89,19 +74,19 @@ namespace DrawingsServer.Controllers
         // POST: /Drawings/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Drawing newDrawing)
+        public ActionResult Edit(Drawing newDrawing, HttpPostedFileBase drawingImage, string canvasImage)
         {
             if (ModelState.IsValid)
             {
                 Drawing drawing = m_drawingsService.Get(newDrawing.Id);
-                UpdateModel(drawing);
-                m_drawingsService.Update(drawing);
-                return RedirectToAction("Index");
+                drawing = FillDrawing(drawing, drawingImage, canvasImage);
+                if (drawing != null)
+                {
+                    m_drawingsService.Update(drawing);
+                    return RedirectToAction("Index");
+                }
             }
-            else
-            {
-                return View(newDrawing);
-            }
+            return View(newDrawing);
         }
 
         //
@@ -135,5 +120,34 @@ namespace DrawingsServer.Controllers
             return Json(m_drawingsService.GetLatest(3).Select(d => new { Title = d.Title, ImageSource = String.Format("data:{0};base64,{1}", d.ImageContentType, Convert.ToBase64String(d.Image))}),
                 JsonRequestBehavior.AllowGet);
         }
+
+        private Drawing FillDrawing(Drawing newDraw, HttpPostedFileBase drawingImage, string canvasImage)
+        {
+            TryUpdateModel(newDraw);
+            if (ModelState.IsValid)
+            {
+                if (drawingImage != null)
+                {
+                    newDraw.ImageContentType = drawingImage.ContentType;
+                    newDraw.Image = new byte[drawingImage.ContentLength];
+                    drawingImage.InputStream.Read(newDraw.Image, 0, drawingImage.ContentLength);
+                    return newDraw;
+                }
+                else if (canvasImage != null)
+                {
+                    Regex expr = new Regex("data:(.*);base64,(.*)");
+                    MatchCollection matches = expr.Matches(canvasImage);
+                    if (matches.Count == 1 && matches[0].Groups.Count == 3)
+                    {
+                        // first group in match is the whole text
+                        newDraw.ImageContentType = matches[0].Groups[1].Value;
+                        newDraw.Image = Convert.FromBase64String(matches[0].Groups[2].Value);
+                    return newDraw;
+                    }
+                }
+            }
+            return null;
+        }
+
     }
 }

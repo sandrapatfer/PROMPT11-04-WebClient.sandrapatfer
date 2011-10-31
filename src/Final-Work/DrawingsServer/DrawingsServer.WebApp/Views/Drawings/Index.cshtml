@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DrawingsServer.DomainModel.Drawing>
+﻿@model DrawingsServer.DomainModel.Helpers.IPagedList<DrawingsServer.DomainModel.Drawing>
 
 @{
     ViewBag.Title = "Index";
@@ -6,49 +6,5 @@
 
 <h2>Index</h2>
 
-<table>
-    <tr>
-        <th>
-            Title
-        </th>
-        <th>
-            Author
-        </th>
-        <th>
-            Created
-        </th>
-        <th>
-            LastUpdated
-        </th>
-        <th>
-            Category
-        </th>
-        <th></th>
-    </tr>
+@Html.Partial("_DrawingsTable")
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>

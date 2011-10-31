@@ -9,6 +9,7 @@ namespace DrawingsServer.DomainModel.Services
     public interface IDrawingsService
     {
         IPagedList<Drawing> GetAllDrawings(int pageIndex, int pageSize);
+        IPagedList<Drawing> GetAllDrawings(string drawingTitle, int pageIndex, int pageSize);
         ICollection<Drawing> GetLatest(int count);
 
         void Add(Drawing newDrawing);

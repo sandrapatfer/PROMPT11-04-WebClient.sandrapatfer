@@ -1,7 +1,6 @@
 ﻿(function (window, document, undefined) {
 
     function Updater() {
-        this.requestsConfigs = [];
     }
 
     Updater.prototype.add = function (config) {

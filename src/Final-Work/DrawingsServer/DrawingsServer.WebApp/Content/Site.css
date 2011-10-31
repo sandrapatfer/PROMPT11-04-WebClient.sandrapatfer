@@ -303,14 +303,21 @@ div#title {
 ----------------------------------------------------------*/
 .display-label, 
 .editor-label {
-    margin: 1em 0 0 0;
     display: inline;
-    text-decoration: underline;
 }
+
+.display-label 
+{
+    font-weight:bold;
+}    
 
 .display-label::after, 
 .editor-label::after {
     content: ": ";
+}
+
+.editor-label-image {
+    margin: 1em 0 0 0;
 }
 
 .display-field, 
@@ -335,6 +342,11 @@ div#title {
 
 .tri-state {
     width: 6em;
+}
+
+.field-element 
+{
+    margin-top: 8px;
 }
 
 /* Canvas */
@@ -375,4 +387,16 @@ img#drawingImage
 {
     background-color: White;
     width: 180px;
+}
+
+/* Index filtering */
+
+.filter-drawings 
+{
+    margin: 10px 10px 0 0;
+}
+
+.filter-drawings-field
+{
+    margin: 10px 0 0 0;
 }

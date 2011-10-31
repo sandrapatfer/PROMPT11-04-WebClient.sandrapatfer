@@ -9,6 +9,8 @@ using System.Text.RegularExpressions;
 
 namespace DrawingsServer.Controllers
 {
+    using Utils;
+
     public class DrawingsController : Controller
     {
         IDrawingsService m_drawingsService;
@@ -23,12 +25,12 @@ namespace DrawingsServer.Controllers
 
         public ActionResult Index(int PageNumber)
         {
-            return View(m_drawingsService.GetAllDrawings(PageNumber, 1));
+            return View(m_drawingsService.GetAllDrawings(PageNumber, Config.PageSize));
         }
 
-        public PartialViewResult Paging(int PageNumber)
+        public PartialViewResult Paging(int PageNumber, string Title)
         {
-            return PartialView("_DrawingsTable", m_drawingsService.GetAllDrawings(PageNumber, 1));
+            return PartialView("_DrawingsTable", m_drawingsService.GetAllDrawings(Title, PageNumber, Config.PageSize));
         }
 
         //
@@ -51,9 +53,9 @@ namespace DrawingsServer.Controllers
         // POST: /Drawings/Create
 
         [HttpPost]
-        public ActionResult Create(HttpPostedFileBase drawingImage, string canvasImage)
+        public ActionResult Create(HttpPostedFileBase drawingImageFile, string canvasImage)
         {
-            Drawing newDraw = FillDrawing(new Drawing(), drawingImage, canvasImage);
+            Drawing newDraw = FillDrawing(new Drawing(), drawingImageFile, canvasImage);
             if (newDraw != null)
             {
                 m_drawingsService.Add(newDraw);
@@ -74,12 +76,12 @@ namespace DrawingsServer.Controllers
         // POST: /Drawings/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Drawing newDrawing, HttpPostedFileBase drawingImage, string canvasImage)
+        public ActionResult Edit(Drawing newDrawing, HttpPostedFileBase drawingImageFile, string canvasImage)
         {
             if (ModelState.IsValid)
             {
                 Drawing drawing = m_drawingsService.Get(newDrawing.Id);
-                drawing = FillDrawing(drawing, drawingImage, canvasImage);
+                drawing = FillDrawing(drawing, drawingImageFile, canvasImage);
                 if (drawing != null)
                 {
                     m_drawingsService.Update(drawing);
@@ -115,9 +117,13 @@ namespace DrawingsServer.Controllers
             }
         }
 
+
+        //
+        // AJAX GET: /Drawings/Latest
+
         public JsonResult Latest()
         {
-            return Json(m_drawingsService.GetLatest(3).Select(d => new { Title = d.Title, ImageSource = String.Format("data:{0};base64,{1}", d.ImageContentType, Convert.ToBase64String(d.Image))}),
+            return Json(m_drawingsService.GetLatest(Config.LatestPageSize).Select(d => new { Title = string.IsNullOrEmpty(d.Title) ? " " : d.Title, ImageSource = String.Format("data:{0};base64,{1}", d.ImageContentType, Convert.ToBase64String(d.Image)) }),
                 JsonRequestBehavior.AllowGet);
         }
 

@@ -25,7 +25,7 @@ namespace DrawingsServer
             routes.MapRoute(
                 "Paging",
                 "{controller}/Page{PageNumber}/",
-                new { controller = "Drawings", action = "Paging", PageNumber = 0 },
+                new { controller = "Drawings", action = "Paging", PageNumber = 0, Title = "" },
                 new { PageNumber = @"\d+" }
             );
 

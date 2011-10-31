@@ -15,6 +15,11 @@ namespace DrawingsServer
             return MvcHtmlString.Create(string.Format("<input type=\"file\" id=\"{0}\" name=\"{0}\" />", inputId));
         }
 
+        public static MvcHtmlString ImageBase64(this HtmlHelper htmlHelper, string id, byte[] image, string imageContentType)
+        {
+            return ImageBase64(htmlHelper, id, image, imageContentType, null);
+        }
+        
         public static MvcHtmlString ImageBase64(this HtmlHelper htmlHelper, string id, byte[] image, string imageContentType, object htmlAttributes)
         {
             string attrs = "";

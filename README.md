@@ -30,7 +30,7 @@ A publicação pode ser realizada usando um ficheiro em disco ou desenhando no c
 
 ### Apresentação dos desenhos mais recentes
 
-A lista de desenhos mais recentes usa AJAX para pedir os ultimos 3 desenhos da lista.
+A lista de desenhos mais recentes usa AJAX para pedir os ultimos 3 desenhos da lista, enviando o id do ultimo recebido.
 Usa-se um timer para pedir os 3 desenhos mais recentes e através da definição de templates preenche-se uma lista.
 
 Foi definida uma vista parcial, _LastDrawings, que configura o updater com o url a ler, o template a usar e o id do elemento a escrever com o texto final. Este objecto está definido no ficheiro updater.js.
@@ -50,5 +50,4 @@ A pagina de indice inclui uma area de filtro que permite restringir a lista por 
    * A apresentação de todos os desenhos apenas tem um modo de visualização
    * A funcionalidade de paginação apenas funciona com AJAX. Como é que se consegue que a mesma funcionalidade funcione com e sem AJAX? Não descobri...
    * A funcionalidade de app cache para funcionar offline seria interessante para permitir desenhar no canvas sem rede, mas não consegui testar, apenas inclui o ficheiro cache.manifest. Sendo as views sempre geradas não há nenhuma maneira de a app funcionar offline?
-   * A funcionalidade de apresentação dos desenhos mais recentes deveria suportar um mecanismo para informar o servidor de qual o ultimo desenho obtido
 

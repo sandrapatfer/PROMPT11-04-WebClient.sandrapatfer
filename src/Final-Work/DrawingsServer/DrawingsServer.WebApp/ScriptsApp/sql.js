@@ -10,13 +10,13 @@
 
         db.transaction(function (tx) {
             tx.executeSql('INSERT INTO drawings (id, title) VALUES (1, "teste1")');
-            tx.executeSql('INSERT INTO drawings (id, title) VALUES (?, ?)', [2, "teste2"]);
+            tx.executeSql('INSERT INTO drawings (id, title) VALUES (?, ?)', [2, 'teste2']);
         });
 
         db.transaction(function (tx) {
             tx.executeSql("SELECT * FROM drawings", [], function (tx, values) {
                 for (var i = 0; i < values.rows.length; i++) {
-                    alert(values.rows.item(i).title);
+                    console.log(values.rows.item(i).title);
                 }
             });
         });

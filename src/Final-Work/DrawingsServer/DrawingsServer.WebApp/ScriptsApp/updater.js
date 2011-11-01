@@ -7,25 +7,31 @@
         var templateId = config["templateId"];
         var url = config["url"];
         var outputContainer = config["outputContainer"];
+        var dataIdFunc = config["dataIdFunc"];
 
-        if (templateId != undefined && url != undefined && outputContainer != undefined) {
-            $.getJSON(url, function (dataArray) {
-                processData(dataArray, config);
+        if (templateId != undefined && url != undefined && outputContainer != undefined && dataIdFunc != undefined) {
+            $.getJSON(url, { lastId: -1 }, function (dataArray) {
+                processData(dataArray, config, -1);
             });
         }
     }
 
-    function processData(dataArray, config) {
-        var outputElem = $("#" + config["outputContainer"]);
-        outputElem.empty();
-        $.each(dataArray, function (index, data) {
-            var templateElem = $(template(config["templateId"], data));
-            templateElem.appendTo(outputElem);
-        });
+    function processData(dataArray, config, vLastId) {
+        if (dataArray.length > 0) {
+            var outputElem = $("#" + config["outputContainer"]);
+            outputElem.empty();
+            $.each(dataArray, function (index, data) {
+                var templateElem = $(template(config["templateId"], data));
+                var dataId = config["dataIdFunc"](data);
+                templateElem.attr("data-id", dataId);
+                templateElem.appendTo(outputElem);
+                vLastId = vLastId < dataId ? dataId : vLastId;
+            });
+        }
 
         setTimeout(function () {
-            $.getJSON(config["url"], function (dataArray) {
-                processData(dataArray, config);
+            $.getJSON(config["url"], { lastId: vLastId }, function (dataArray) {
+                processData(dataArray, config, vLastId);
             });
         }, 2000);
     }

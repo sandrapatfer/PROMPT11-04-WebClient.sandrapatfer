@@ -10,7 +10,7 @@ namespace DrawingsServer.DomainModel.Services
     {
         IPagedList<Drawing> GetAllDrawings(int pageIndex, int pageSize);
         IPagedList<Drawing> GetAllDrawings(string drawingTitle, int pageIndex, int pageSize);
-        ICollection<Drawing> GetLatest(int count);
+        ICollection<Drawing> GetLatest(int last, int count);
 
         void Add(Drawing newDrawing);
 

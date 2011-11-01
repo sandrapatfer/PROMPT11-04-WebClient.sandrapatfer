@@ -8,8 +8,10 @@
 
 <script type="text/javascript">
     $(function () {
-        updater.add({url: '@Url.Action("Latest", "Drawings")',
-        templateId: 'lastDrawingsTemplate',
-        outputContainer: 'last_drawings'});
+        updater.add({ url: '@Url.Action("Latest", "Drawings")',
+            templateId: 'lastDrawingsTemplate',
+            outputContainer: 'last_drawings',
+            dataIdFunc: function (obj) { return obj.Id; }
+        });
     });
 </script>

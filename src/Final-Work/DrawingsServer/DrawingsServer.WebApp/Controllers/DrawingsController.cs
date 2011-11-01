@@ -121,9 +121,9 @@ namespace DrawingsServer.Controllers
         //
         // AJAX GET: /Drawings/Latest
 
-        public JsonResult Latest()
+        public JsonResult Latest(int lastId)
         {
-            return Json(m_drawingsService.GetLatest(Config.LatestPageSize).Select(d => new { Title = string.IsNullOrEmpty(d.Title) ? " " : d.Title, ImageSource = String.Format("data:{0};base64,{1}", d.ImageContentType, Convert.ToBase64String(d.Image)) }),
+            return Json(m_drawingsService.GetLatest(lastId, Config.LatestPageSize).Select(d => new { Id = d.Id, Title = string.IsNullOrEmpty(d.Title) ? " " : d.Title, ImageSource = String.Format("data:{0};base64,{1}", d.ImageContentType, Convert.ToBase64String(d.Image)) }),
                 JsonRequestBehavior.AllowGet);
         }
 

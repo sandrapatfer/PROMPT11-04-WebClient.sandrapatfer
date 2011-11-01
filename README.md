@@ -9,14 +9,14 @@ O ficheiro movies.html mostra uma lista de filmes com um CSS, clicando na pagina
 
 2. Formulario
 
-3. Templates HTML
+3. Templates HTML<br>
 (directoria Final-Work\Part-1\WebApp\Scripts\template.js)
 
 A função template lê a tag template na pagina e consoante o segundo argumento pode retornar a função, executar a função sobre um objecto ou um array de objectos.
 
 O ficheiro movies.html foi alterado para testar a funcionalidade dos templates.
 
-4. Linq
+4. Linq<br>
 (directoria Final-Work\Part-1\WebApp\Scripts\linq.js)
 
 Implementação dos vários metodos linq. O ficheiro test_linq.htm (não tem interface) exemplifica os metodos atraves de alguns testes simples.

@@ -2,7 +2,7 @@
 
 ## Parte 1 ##
 
-1. Apresentação de Filmes
+1. Apresentação de Filmes<br>
 (directoria Final-Work\Part-1\WebApp\Movies)
 
 O ficheiro movies.html mostra uma lista de filmes com um CSS, clicando na pagina o CSS muda.

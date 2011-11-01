@@ -53,9 +53,12 @@
             <label for="optionDrawing_canvas">Draw</label>
             <input type="hidden" name="canvasImage" id="canvasImage" />
             @ViewBag.ImageSource
-            <canvas id="drawingCanvas" width="400" height="300">
-                <p>Canvas is not suported, try another browser...</p>
-            </canvas>
+            <section id="drawingCanvasSection">
+                <canvas id="drawingCanvas" width="400" height="300">
+                    <p>Canvas is not suported, try another browser...</p>
+                </canvas>
+                <p>Drag an image to the canvas</p>
+            </section>
         </div>
 
         <p>
@@ -74,6 +77,6 @@
 
     $(function () {
         radioButtonsManager.add({ radio: "optionDrawing_file", control: "drawingImageFile" });
-        radioButtonsManager.add({ radio: "optionDrawing_canvas", control: "drawingCanvas" });
+        radioButtonsManager.add({ radio: "optionDrawing_canvas", control: "drawingCanvasSection" });
     });
 </script>

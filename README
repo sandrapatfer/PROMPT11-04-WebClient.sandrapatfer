@@ -1,0 +1,38 @@
+Trabalho Final
+
+Parte 1
+
+1. Apresentação de Filmes
+(directoria Final-Work\Part-1\WebApp\Movies)
+
+O ficheiro movies.html mostra uma lista de filmes com um CSS, clickando na pagina o CSS muda.
+
+2. Formulario
+
+3. Templates HTML
+(directoria Final-Work\Part-1\WebApp\Scripts\template.js)
+
+Função template que lê a tag template na pagina e consoante o segundo argumento pode retornar a função, executar a função sobre um objecto ou um array de objectos.
+
+4. Linq
+(directoria Final-Work\Part-1\WebApp\Scripts\link.js)
+
+Implementação dos vários metodos linq. Alguns testes estão exemplificados no ficheiro test_linq.htm (não tem interface)
+
+Parte 2
+
+Aplicação web
+
+A pagina principal mostra a lista de desenhos inseridos.
+
+Publicação de desenhos
+A publicação pode ser realizada usando um ficheiro em disco ou desenhando no canvas.
+
+Apresentação de desenhos mais recentes
+A lista de desenhos mais recentes usa AJAX para pedir os ultimos 3 desenhos da lista.
+
+Apresentação de todos os desenhos
+A pagina de indice mostra todos os desenhos, com uma interface simples de paginação.
+
+Procura de desenhos
+A pagina de indice inclui uma area de filtro que permite restringir a lista por titulo.

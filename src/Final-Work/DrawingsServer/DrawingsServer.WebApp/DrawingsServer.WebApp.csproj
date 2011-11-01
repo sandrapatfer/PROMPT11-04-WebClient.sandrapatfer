@@ -131,6 +131,7 @@
     <Content Include="README.jQuery.vsdoc.txt" />
     <Content Include="ScriptsApp\canvas.js" />
     <Content Include="ScriptsApp\radios.js" />
+    <Content Include="ScriptsApp\sql.js" />
     <Content Include="ScriptsApp\template.js" />
     <Content Include="ScriptsApp\updater.js" />
     <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
@@ -204,16 +205,19 @@
     <Content Include="Views\Drawings\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_LastDrawings.cshtml" />
+    <Content Include="Views\Drawings\_LastDrawings.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_Navigation.cshtml" />
+    <Content Include="Views\Drawings\_Navigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Drawings\_DrawingsTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Drawings\_FilterDrawings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cache.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -9,55 +9,111 @@
         return this;
     }
 
+    LinqSet.prototype.error = function (errH) {
+        this.errorHandler = errH;
+    }
+
     LinqSet.prototype.foreach = function (actionFunction) {
-        $.each(this.list, function (i, elem) {
-            actionFunction.call(elem);
-        });
-        return this;
+        try {
+            $.each(this.list, function (i, elem) {
+                actionFunction.call(elem);
+            });
+        }
+        catch (err) {
+            this.errorHandler("Error in foreach: " + err.description);
+        }
     }
 
     LinqSet.prototype.where = function (predicateFunction) {
-        var ret = [];
-        $.each(this.list, function (i, elem) {
-            if (predicateFunction.call(elem)) {
-                ret.push(elem);
-            }
-        });
-        this.list = ret;
+        try {
+            var ret = [];
+            $.each(this.list, function (i, elem) {
+                if (predicateFunction.call(elem)) {
+                    ret.push(elem);
+                }
+            });
+            this.list = ret;
+        }
+        catch (err) {
+            this.errorHandler("Error in where: " + err.description);
+        }
         return this;
     }
 
     LinqSet.prototype.order = function (columnSelectorFunction) {
-        this.list = Array.prototype.sort.call(this.list, function (item1, item2) {
-            return (columnSelectorFunction.call(item1) < columnSelectorFunction.call(item2) ? -1 :
+        try {
+            this.list = Array.prototype.sort.call(this.list, function (item1, item2) {
+                return (columnSelectorFunction.call(item1) < columnSelectorFunction.call(item2) ? -1 :
             (columnSelectorFunction.call(item1) == columnSelectorFunction.call(item2) ? 0 : 1));
-        });
+            });
+        }
+        catch (err) {
+            this.errorHandler("Error in order: " + err.description);
+        }
         return this;
     }
 
     LinqSet.prototype.select = function (selectorFunction) {
-        var arr = [];
-        $.each(this.list, function (i, elem) {
-            arr.push(selectorFunction(elem));
-        });
-        this.list = arr;
+        try {
+            if (typeof selectorFunction == "function") {
+                var arr = [];
+                $.each(this.list, function (i, elem) {
+                    arr.push(selectorFunction.call(elem));
+                });
+                this.list = arr;
+            }
+            else if (typeof selectorFunction == "string") {
+                var arr = [];
+                if (arguments.length > 1) {
+                    for (var i = 0; i < this.list.length; i++) {
+                        var obj = {};
+                        for (var j = 0; j < arguments.length; j++) {
+                            obj[arguments[j]] = this.list[i][arguments[j]];
+                        }
+                        arr.push(obj);
+                    }
+                }
+                else {
+                    for (var i = 0; i < this.list.length; i++) {
+                        arr.push(this.list[i][selectorFunction]);
+                    }
+                }
+                this.list = arr;
+            }
+        }
+        catch (err) {
+            this.errorHandler("Error in select: " + err.description);
+        }
         return this;
     }
 
     LinqSet.prototype.any = function (predicateFunction) {
-        for (var i = 0; i < this.list.length; i++) {
-            if (predicateFunction.call(this.list[i])) {
-                return true;
+        if (this.list.length == 0) {
+            this.errorHandler("The array is emtpy");
+        }
+        try {
+            for (var i = 0; i < this.list.length; i++) {
+                if (predicateFunction.call(this.list[i])) {
+                    return true;
+                }
             }
+        }
+        catch (err) {
+            this.errorHandler("Error in any: " + err.description);
         }
         return false;
     }
 
     LinqSet.prototype.all = function (predicateFunction) {
-        for (var i = 0; i < this.list.length; i++) {
-            if (!predicateFunction.call(this.list[i])) {
-                return false;
+        try {
+            for (var i = 0; i < this.list.length; i++) {
+                if (!predicateFunction.call(this.list[i])) {
+                    return false;
+                }
             }
+        }
+        catch (err) {
+            this.errorHandler("Error in all: " + err.description);
         }
         return true;
     }

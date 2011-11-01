@@ -7,29 +7,44 @@
     <script src="../Scripts/linq.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        //var arr = [1, 2].where(function (item) { return item % 2 == 0; });
-        //$.each(arr, function () { console.log(this) });
+        var arr = [1, 2];
+        $.each(arr, function (i, elem) { console.log(elem) });
+        linq.from(arr).foreach(function () { console.log(this.toString()); });
+
+        function to_string(v) {
+            if (typeof v == "string") {
+                return v;
+            }
+            return v.toString();
+        }
+
+        function array_to_string(arr) {
+            var str = "";
+            linq.from(arr).foreach(function () { str = str == "" ? to_string(this) : str + ", " + to_string(this); });
+            return str;
+        }
+        console.log(array_to_string(arr));
 
         var arr = [1, 2, 3, 4];
         var filtered = linq
                         .from(arr)
 //                        .foreach(console.log.bind(console))
-                        .where(function (item) { return item % 2 == 0; })
+                        .where(function (item) { return item % 2 == 0; });
 //                        .foreach(console.log.bind(console));
 
+//        console.log("order");
         var arr = [5, 6, 3, 4];
         var filtered = linq
                         .from(arr)
-//                        .foreach(console.log.bind(console))
-                        .order(function () { return this; })
-//                        .foreach(console.log.bind(console));
+                        .order(function () { return this; });
 
+        console.log("select (i + 1)");
         var arr = [5, 6, 3, 4];
+        console.log(array_to_string(arr));
         var filtered = linq
                         .from(arr)
-//                        .foreach(console.log.bind(console))
-                        .select(function (item) { return item + 1; })
-//                        .foreach(console.log.bind(console));
+                        .select(function () { return this + 1; });
+        console.log(array_to_string(filtered.list));
 
 
         var students = [{ name: "Rui", grade: "10" }, { name: "Carlos", grade: "11" }, { name: "João", grade: 12}];
@@ -38,9 +53,14 @@
 //        console.log("true == " + a);
 
         var b = linq.from(students).where(function () { return this.grade > 11; }).count();
-        console.log("1 == " + b);
+        console.log("where result: 1 == " + b);
 
+        console.log("error handler");
+        linq.error(function (msg) { console.log(msg); });
+        linq.from([]).any(function () { return this.grade === 12 });
 
+        var names = linq.from(students).select("name");
+        console.log("student names: " + array_to_string(names.list));
 
     </script>
 </head>

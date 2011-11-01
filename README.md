@@ -2,7 +2,8 @@
 
 ## Parte 1 ##
 
-1. Apresentação de Filmes(directoria Final-Work\Part-1\WebApp\Movies)
+1. Apresentação de Filmes
+(directoria Final-Work\Part-1\WebApp\Movies)
 
 O ficheiro movies.html mostra uma lista de filmes com um CSS, clicando na pagina o CSS muda.
 
@@ -49,5 +50,5 @@ A pagina de indice inclui uma area de filtro que permite restringir a lista por 
    * O formulário, o segundo exercicio de CSS, não foi realizado
    * A apresentação de todos os desenhos apenas tem um modo de visualização
    * A funcionalidade de paginação apenas funciona com AJAX. Como é que se consegue que a mesma funcionalidade funcione com e sem AJAX? Não descobri...
-   * A funcionalidade de app cache para funcionar offline seria interessante para permitir desenhar no canvas sem rede, mas não consegui testar, apenas inclui o ficheiro cache.manifest. Sendo as views sempre geradas não há nenhuma maneira de a app funcionar offline?
+   * A funcionalidade de app cache para funcionar offline seria interessante para permitir desenhar no canvas sem rede, mas não cheguei a testar, apenas inclui o ficheiro cache.manifest.
 
